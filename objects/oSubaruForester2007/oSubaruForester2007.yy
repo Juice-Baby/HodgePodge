@@ -1,9 +1,10 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oSpeedGate3",
+  "name": "oSubaruForester2007",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
@@ -12,8 +13,8 @@
     "path": "folders/Objects.yy",
   },
   "parentObjectId": {
-    "name": "oSpeedGate",
-    "path": "objects/oSpeedGate/oSpeedGate.yy",
+    "name": "oEntity",
+    "path": "objects/oEntity/oEntity.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -30,7 +31,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "sSubaruForester2007",
+    "path": "sprites/sSubaruForester2007/sSubaruForester2007.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }

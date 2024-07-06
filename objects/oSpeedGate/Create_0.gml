@@ -1,7 +1,8 @@
 /// @description Setup
+speedGateObj = noone;
+speedGateSpr = sSpeedGateIdle;
 spdThreshold = 3;
 update = true;
-state = "IDLE";
 anim = -1;
 
 

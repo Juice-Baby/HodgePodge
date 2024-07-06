@@ -60,7 +60,6 @@ function compAnimMeleeAttack(_spr,_anim,_dmg=10,_kb=1,_time=120,_range=48){
 	endLag = 0;
 }
 function compProjectile(_active=true,_lag=60,_dmg=1,_spd=8,_firespd=12,_lifetime=15,_spr){
-	projActive = _active;
 	projFiredLast = false;
 	projEndLag = _lag;
 	projDamage = _dmg;
@@ -68,6 +67,9 @@ function compProjectile(_active=true,_lag=60,_dmg=1,_spd=8,_firespd=12,_lifetime
 	projFireSpd = _firespd;
 	projLifetime = _lifetime;
 	projSprite = _spr;
+}
+function compDrops(_array){
+	dropArray = _array;
 }
 
 

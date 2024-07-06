@@ -46,9 +46,32 @@ function rollMovement(){
 		t.y-=6;
 	}
 	var endRollEarly = false;
-	var coll = place_meeting(x+hsp*2,y+vsp*2,oEntity);
-	if (roll or coll) and rollTimer<(rollTimerMax-12){
-		endRollEarly = true;
+	var coll = instance_place(x+hsp*2,y+vsp*2,oEntity);
+	if rollTimer<(rollTimerMax-12){
+		if roll{
+			endRollEarly = true;
+		}
+		if coll!=noone{
+			var dir = point_direction(x,y-6,x+hsp,y-6+vsp);
+			//FORCE HITBOX
+			var h = instance_create_depth(x,y-6,depth-1,oMeleeHitbox);
+			with(h){
+				creator = other;
+				sprite_index = other.hitboxSprite;
+				image_angle = dir;
+				direction = dir;
+				damage = other.hitboxDamage;
+				knockback = other.hitboxKnockback;
+				speed = 4;
+				alarm[0] = 6;
+			}
+			//STOP IF TOO BIG A TARGET
+			if (coll.hp-hitboxDamage)>0{
+				hsp*=-.5;
+				vsp*=-.5;
+				rollTimer = 30;
+			}
+		}
 	}
 	if endRollEarly{
 		//END ROLL EARLY
