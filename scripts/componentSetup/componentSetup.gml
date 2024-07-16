@@ -34,16 +34,22 @@ function compMoveTowards(_deaccel=.25,_accel=.25,_topSpeed=2){
 	topSpeed = _topSpeed;
 	compMovement(_deaccel);
 }
-function compRoll(_rollTimerMax=90,_rollSpeed=4,_spr,_dmg=10,_kb=1){
+function compRoll(_rollTimerMax=90,_rollSpeed=4,_spr,_dmg=10,_kb=1,_nrgUse=4){
 	rollTimer = 0;
 	rollTimerMax = _rollTimerMax;
 	rollSpeed = _rollSpeed;
 	hitboxSprite = _spr;
 	hitboxDamage = _dmg;
 	hitboxKnockback = _kb;
+	rollEnergyUse = _nrgUse;
 }
-function compTargeting(){
-	target = noone;
+function compTargeting(_t=noone){
+	target = _t;
+}
+function compTargetingRange(_t=noone,_range=144,_xray=false){
+	compTargeting(_t);
+	alertRange = _range;
+	seeThroughColl = _xray;
 }
 function compCameraFollow(_follow=id,_spd=.35){
 	cam = view_camera[0];
@@ -59,7 +65,8 @@ function compAnimMeleeAttack(_spr,_anim,_dmg=10,_kb=1,_time=120,_range=48){
 	attackRange = _range;
 	endLag = 0;
 }
-function compProjectile(_active=true,_lag=60,_dmg=1,_spd=8,_firespd=12,_lifetime=15,_spr){
+function compProjectile(_active=true,_lag=60,_dmg=3,_spd=8,_firespd=12,_lifetime=15,_spr,_nrgUse=2){
+	projActive = _active;
 	projFiredLast = false;
 	projEndLag = _lag;
 	projDamage = _dmg;
@@ -67,6 +74,7 @@ function compProjectile(_active=true,_lag=60,_dmg=1,_spd=8,_firespd=12,_lifetime
 	projFireSpd = _firespd;
 	projLifetime = _lifetime;
 	projSprite = _spr;
+	projEnergyUse = _nrgUse;
 }
 function compDrops(_array){
 	dropArray = _array;

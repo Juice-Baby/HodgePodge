@@ -1,35 +1,55 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function stupidHeadLogic(){
-	var p = targetNearest(x,y,oEntity);
+	var p = oPlayer;//targetNearest(x,y,oCreature);
 	//IF NO PLAYER, DO NOTHING
 	if endLag>0{
 		endLag--;
 		exit;
 	}
+	//IF NO TARGET OR DOING ATTACK
 	if p = noone or sprite_index = attackAnimation{
+		//IF NOT ATTACKING
 		if sprite_index!=attackAnimation{
+			//THEN SLOW DOWN
 			var dis = point_direction(x,y,x+hsp,y+vsp);
 			jumpApr(0,dis,deaccel);
 		}
+		//OTHERWISE DO NOTHING/PERFORM ATTACK
 		exit;
 	}
+	var lineOfSight = collision_line(x,y-6,p.x,p.y,oWall,false,true);
 	var dir = point_direction(x,y,p.x,p.y);
 	var dis = distance_to_object(p);
-	//RANGE CHECK
-	if dis>attackRange{
-		//KEEP MOVING
-		sprite_index = sStupidHeadMoving;
-		jumpApr(topSpeed,dir,accel);
-	}else{
-		//ATTACK IF IN RANGE AND OFF COOLDOWN
-		if sprite_index!=attackAnimation and alarm[0]<1{
-			sprite_index = attackAnimation;
-			dis = point_distance(x,y,x+hsp,y+vsp);
-			var spd = topSpeed-dis;
-			jumpAdd(spd,dir);
+	//ATTACK/MOVING LOGIC
+	//IF YOU CAN SEE THEM
+	if lineOfSight=noone{
+		//CHECK THE DISTANCE
+		//IF WITHIN ALERT RANGE
+		if dis<alertRange{
+			//IF WITHIN ATTACK RANGE
+			if dis<attackRange{
+				//BEGIN ATTACKING
+				sprite_index = attackAnimation;
+				dis = point_distance(x,y,x+hsp,y+vsp);
+				var spd = topSpeed-dis;
+				jumpAdd(spd,dir);
+			}else{
+				//OTHERWISE, MOVE IN
+				jumpApr(topSpeed,dir,accel);
+			}
+		}else{
+			//IF NOT IN RANGE
+			//THEN SLOW DOWN
+			var dis = point_direction(x,y,x+hsp,y+vsp);
+			jumpApr(0,dis,deaccel);
+			exit;
 		}
 	}
+	//IF NOT IN RANGE OR IN LINE OF SIGHT, SLOW DOWN ANYWAY
+	var dis = point_direction(x,y,x+hsp,y+vsp);
+	jumpApr(0,dis,deaccel);
+	exit;
 }
 function animMeleeAttack(){
 	if sprite_index!=attackAnimation { exit }

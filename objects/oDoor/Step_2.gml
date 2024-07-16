@@ -10,7 +10,7 @@ if coll{
 	inRadius = true;
 	var e = keyboard_check_pressed(ord("E"));
 	var amt = global.resourceAmounts[resource.key];
-	if e and amt>doorCost{
+	if e and amt>=doorCost{
 		sprite_index = spr.unlocking;
 		paidFor = true;
 	}

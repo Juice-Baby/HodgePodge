@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function createDrops(_a=[],_disVari=4){
+function createDrops(_a=[],_disVari=10){
 	var ar = _a;
 	var i = 0;
 	var s = array_length(ar);
@@ -19,6 +19,23 @@ function createDrops(_a=[],_disVari=4){
 			setup(it);
 		}
 		i++;
+	}
+}
+function itemInit(_id){
+	switch(_id){
+		case resource.gems:
+			image_blend = make_color_hsv(irandom(255),255,255);
+			break;
+	}
+}
+function playerPickedUp(_id){
+	switch(_id){
+		case resource.engine:
+			global.energy = approach(global.energy,global.energyMax,50);
+			break;
+		case resource.gems:
+			global.energy = approach(global.energy,global.energyMax,5);
+			break;
 	}
 }
 

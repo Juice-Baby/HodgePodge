@@ -2,6 +2,7 @@
 compHealth(20);
 compMoveTowards(.05,2/16,2);
 compBaseColl(true);
+compTargetingRange(,48*5);
 compAnimMeleeAttack(sStupidHeadJumpHitbox,sStupidHeadJump,7,3,90,48);
 
 states = ds_list_create();

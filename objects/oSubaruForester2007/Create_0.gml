@@ -1,6 +1,6 @@
 /// @description Setup
-compHealth(5);
+compHealth(100);
 compMovement(3);
-compDrops([resource.gems,resource.gems]);
+compDrops([resource.engine,resource.engine,resource.engine,resource.key]);
 
 

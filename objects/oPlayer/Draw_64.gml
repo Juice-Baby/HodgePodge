@@ -17,4 +17,11 @@ repeat(s){
 	i++;
 }
 
+//DRAW ENERGY BAR
+var w = 48;
+var h = 6;
+var c = c_lime;
+var per = global.energy/global.energyMax;
+draw_healthbar(4,24,4+w,24+h,100*per,c_black,c,c,0,true,true);
+
 
