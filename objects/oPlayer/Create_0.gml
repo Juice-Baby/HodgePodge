@@ -12,7 +12,7 @@ ds_list_add(states,
 //MOVEMENT STATES
 playerMovement,rollMovement,
 //COLLISIONS
-basicCollision,bounceCollision,
+basicCollision,rollCollision,
 //PROJECTILES AND MISC
 basicProjectile,
 //CAMERA

@@ -1,6 +1,6 @@
 /// @description Show cost
 draw_self();
-if paidFor{ exit }
+if paidFor or !inRadius{ exit }
 var _x = x+sprite_width/2;
 var _y = y+sprite_height/2;
 drawAlign(fa_center,fa_center,fInfo);

@@ -32,6 +32,7 @@ function playerMovement(){
 		}
 	}
 }
+/*
 function rollMovement(){
 	if rollTimer<1{ exit }
 	rollTimer--;
@@ -116,6 +117,48 @@ function rollMovement(){
 		bounceCollider = false;
 	}
 }
+*/
+function rollMovement(){
+	if rollTimer<1{ exit }
+	rollTimer--;
+	//LOSE ENERGY PER DURATION OF ROLL
+	var amt = (4)/60;
+	global.energy=approach(global.energy,0,amt);
+	var xDif = sign((x+hsp)-x);
+	if xDif!=0{
+		image_xscale = xDif;
+	}
+	//var dis = point_distance(x,y,x+hsp,y+vsp);
+	image_speed = (rollTimer/rollTimerMax)*20;
+	var roll = keyboard_check_pressed(vk_space);
+	if rollTimer=rollTimerMax-12{
+		//TELEGRAPH EFFECT
+		if global.energy>=rollEnergyUse{
+			var t = animEndPart(sRollTelegraph,4,irandom(359),0,0);
+			t.y-=6;
+		}else{
+			var t = animEndPart(sRollTelegraphLow,4,irandom(359),0,0);
+			t.y-=6;
+		}
+	}
+	var endRollEarly = false;
+	if roll and rollTimer<(rollTimerMax-12){
+		endRollEarly = true;
+	}
+	if endRollEarly{
+		//END ROLL EARLY
+		rollTimer = 0;
+		jumpSet(0,0);
+	}
+	if rollTimer=0{
+		move = true;
+		sprite_index = sPlayer;
+		image_xscale = 1;
+		image_speed = 1;
+		baseCollider = true;
+		bounceCollider = false;
+	}
+}
 function basicCollision(_obj=oColl){
 	if !baseCollider{ exit }
 	
@@ -139,18 +182,95 @@ function basicCollision(_obj=oColl){
 }
 function bounceCollision(_obj=oColl){
 	if !bounceCollider{ exit }
-	
 	//HORIZONTAL COLLISION
-	if place_meeting(x+hsp,y,_obj){
+	var horColl = instance_place(x+hsp,y,_obj);
+	if horColl!=noone{
 		hsp*=-bounceMulti;
 	}else{
 		x+=hsp;
 	}
 	//VERTICAL COLLISION
-	if place_meeting(x,y+vsp,_obj){
+	var verColl = instance_place(x,y+vsp,_obj);
+	if verColl!=noone{
 		vsp*=-bounceMulti;
 	}else{
 		y+=vsp;
+	}
+}
+function rollCollision(_obj=oColl){
+	if !bounceCollider{ exit }
+	var hasNrg = global.energy>=rollEnergyUse;
+	var hitbox = noone;
+	var bounceOff = false;
+	//HORIZONTAL COLLISION
+	var horColl = instance_place(x+hsp,y,_obj);
+	if horColl!=noone{
+		//IF DON'T THE ENERGY, BOUNCE
+		if !hasNrg{
+			hsp*=-bounceMulti;
+		}else{
+			//IF YOU HAVE THE ENERGY, THEN CHECK FOR A COLLISION
+			//IF SAME INSTANCE IS AN ENTITY
+			if instance_place(x+hsp,y,oEntity)=horColl and 
+			rollTimer<(rollTimerMax-12){
+				//SPAWN HITBOX AT THE END
+				hitbox = horColl;
+			}else{
+				hsp*=-bounceMulti;
+			}
+		}
+	}else{
+		x+=hsp;
+	}
+	//VERTICAL COLLISION
+	var verColl = instance_place(x,y+vsp,_obj);
+	if verColl!=noone{
+		//IF DON'T THE ENERGY, BOUNCE
+		if !hasNrg{
+			vsp*=-bounceMulti;
+		}else{
+			//IF YOU HAVE THE ENERGY, THEN CHECK FOR A COLLISION
+			//IF SAME INSTANCE IS AN ENTITY
+			if instance_place(x,y+vsp,oEntity)=verColl and 
+			rollTimer<(rollTimerMax-12){
+				//SPAWN HITBOX AT THE END
+				hitbox = verColl;
+			}else{
+				vsp*=-bounceMulti;
+			}
+		}
+	}else{
+		y+=vsp;
+	}
+	if hitbox!=noone{
+		var dir = point_direction(x,y-6,x+hsp,y-6+vsp);
+		//FORCE HITBOX
+		if hasNrg and rollTimer<(rollTimerMax-12){
+			var h = instance_create_depth(x,y-6,depth-1,oMeleeHitbox);
+			with(h){
+				creator = other;
+				sprite_index = other.hitboxSprite;
+				image_angle = dir;
+				direction = dir;
+				damage = other.hitboxDamage;
+				knockback = other.hitboxKnockback;
+				speed = 4;
+				alarm[0] = 6;
+			}
+			if hitbox.hp-hitboxDamage>0{
+				bounceOff = true;
+			}
+		}
+	}
+	if bounceOff{
+		hsp*=-.5;
+		vsp*=-.5;
+		move = true;
+		sprite_index = sPlayer;
+		image_xscale = 1;
+		image_speed = 1;
+		baseCollider = true;
+		bounceCollider = false;
 	}
 	//show_debug_message(string(hsp)+"/"+string(vsp));
 }

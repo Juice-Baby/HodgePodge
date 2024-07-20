@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "world",
-    "path": "folders/Objects/world.yy",
+    "name": "gates",
+    "path": "folders/Objects/world/gates.yy",
   },
   "parentObjectId": {
     "name": "oWall",

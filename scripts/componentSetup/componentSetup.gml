@@ -65,6 +65,15 @@ function compAnimMeleeAttack(_spr,_anim,_dmg=10,_kb=1,_time=120,_range=48){
 	attackRange = _range;
 	endLag = 0;
 }
+function compAnimProjectileAttack(_projSpr,_anim,_range,_dmg=10,_kb=1,_time=90,_projSpeed=8){
+	projSprite = _projSpr;
+	attackAnimation = _anim;
+	attackRange = _range;
+	projDamage = _dmg;
+	projKnockback = _kb;
+	projCooldown = _time;
+	projSpeed = _projSpeed;
+}
 function compProjectile(_active=true,_lag=60,_dmg=3,_spd=8,_firespd=12,_lifetime=15,_spr,_nrgUse=2){
 	projActive = _active;
 	projFiredLast = false;

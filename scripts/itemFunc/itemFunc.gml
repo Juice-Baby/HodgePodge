@@ -28,13 +28,16 @@ function itemInit(_id){
 			break;
 	}
 }
+function gainEnergy(_nrg){
+	global.energy = approach(global.energy,global.energyMax,_nrg);
+}
 function playerPickedUp(_id){
 	switch(_id){
 		case resource.engine:
-			global.energy = approach(global.energy,global.energyMax,50);
+			gainEnergy(50);
 			break;
 		case resource.gems:
-			global.energy = approach(global.energy,global.energyMax,5);
+			gainEnergy(2);
 			break;
 	}
 }

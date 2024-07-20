@@ -1,0 +1,42 @@
+{
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "oFakeWall",
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},"eventNum":0,"eventType":4,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
+  "managed": true,
+  "overriddenProperties": [
+    {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","objectId":{"name":"oFogOfWar","path":"objects/oFogOfWar/oFogOfWar.yy",},"propertyId":{"name":"coverSprite","path":"objects/oFogOfWar/oFogOfWar.yy",},"value":"sBrickwall",},
+  ],
+  "parent": {
+    "name": "world",
+    "path": "folders/Objects/world.yy",
+  },
+  "parentObjectId": {
+    "name": "oFogOfWar",
+    "path": "objects/oFogOfWar/oFogOfWar.yy",
+  },
+  "persistent": false,
+  "physicsAngularDamping": 0.1,
+  "physicsDensity": 0.5,
+  "physicsFriction": 0.2,
+  "physicsGroup": 1,
+  "physicsKinematic": false,
+  "physicsLinearDamping": 0.1,
+  "physicsObject": false,
+  "physicsRestitution": 0.1,
+  "physicsSensor": false,
+  "physicsShape": 1,
+  "physicsShapePoints": [],
+  "physicsStartAwake": true,
+  "properties": [],
+  "solid": false,
+  "spriteId": {
+    "name": "sBrickwall",
+    "path": "sprites/sBrickwall/sBrickwall.yy",
+  },
+  "spriteMaskId": null,
+  "visible": true,
+}

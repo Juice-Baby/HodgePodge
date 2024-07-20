@@ -1,6 +1,6 @@
 /// @description Level
 if room=rMainMenu{
-	room_goto(rFirstLevel);
+	room_goto(rApartmentLevel);
 }
 
 

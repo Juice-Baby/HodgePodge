@@ -9,7 +9,7 @@ var _x = resWidth-4;
 var _y = resHeight-4;
 var offset = 16;
 repeat(s){
-	_y = resHeight-4-(offset*(s-(i-1)));
+	_y = resHeight-4-(offset*(i));
 	var re = global.resources[i];
 	var name = global.resourceNames[re];
 	var amt = global.resourceAmounts[re];
